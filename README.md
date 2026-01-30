@@ -1,82 +1,136 @@
-# SQL Activation & Retention Analysis
+# Aviation Operations Retention & Reliability Analysis (SQL)
 
-## Overview
-This project analyzes how early user activation impacts 30-day retention using SQL.
-The objective is to evaluate whether users who engage meaningfully during their first week
-are more likely to remain active in the long term.
+## Project Overview
 
-All analysis was performed in Google BigQuery using user-level event data and
-a modular SQL view-based pipeline.
+This project analyzes aviation operational data to understand how service disruptions and operational reliability influence customer retention behavior.  
+The goal is to transform raw operational records into measurable retention signals and identify which operational failures create the highest downstream customer risk.
 
----
-
-## Data Description
-The dataset consists of synthetic but realistically structured product usage data.
-
-### users
-- user_id
-- signup_date
-
-### events
-- user_id
-- event_time (DATE)
-- event_type (e.g., login, core_feature, secondary_feature)
-
-The data was intentionally generated to reflect heterogeneous user behavior,
-including early engagement patterns and long-term retention differences.
+Rather than treating retention as a purely marketing metric, this project frames retention as an operational outcome tied directly to system reliability.
 
 ---
 
-## Metric Definitions
+## Business Problem
 
-### Activation (Early Engagement)
-A user is considered **activated** if, within the first 7 days after signup:
-- The user triggered the core feature at least once, and
-- The user was active on at least 2 distinct days
+In aviation operations, disruptions such as delays, cancellations, or irregular handling degrade customer trust.  
+When reliability drops, repeat usage declines — but the relationship is rarely quantified at an operational level.
 
-This definition emphasizes sustained early engagement rather than raw event volume.
+The central hypothesis:
 
----
+**Operational instability predicts customer retention risk.**
 
-### Retention (30-Day)
-A user is considered **retained at 30 days** if:
-- The user triggered at least one event on or after day 30 following signup
+This project builds a structured SQL analytics pipeline to measure how disruption patterns correlate with retention behavior.
 
 ---
 
-## Analysis Workflow
-1. Identified events occurring within the first 7 days after signup
-2. Aggregated early user activity metrics at the user level
-3. Labeled users based on activation criteria
-4. Labeled users based on 30-day retention
-5. Compared retention outcomes between activated and non-activated users
+## Data Model
 
-Each step was implemented as a reusable SQL view.
+The dataset contains operational aviation records including:
 
----
+- flight performance and delay indicators
+- cancellation and irregular operations
+- customer interaction and repeat behavior markers
 
-## Key Findings
+To support retention analysis, I constructed an analytical pipeline that aggregates raw event-level data into customer-level and route-level performance signals.
 
-| Activation Status | Users | Retained Users | 30-Day Retention |
-|------------------|-------|----------------|------------------|
-| Not Activated    | 731   | 183            | 25.0%            |
-| Activated        | 269   | 175            | 65.1%            |
+Key engineered components include:
 
-Users who achieved early activation showed a **+40.1 percentage point lift**
-in 30-day retention compared to non-activated users.
-Activated users were more than **2.6× more likely** to be retained after 30 days.
+- disruption frequency per customer
+- repeat usage behavior
+- delay severity metrics
+- operational reliability scores
+
+This mirrors how aviation analytics teams structure retention risk models.
 
 ---
 
-## Business Implications
-- Early activation is a strong leading indicator of long-term retention
-- Improving onboarding and early feature discovery could yield significant downstream gains
-- Activation metrics can be used as early signals for retention-focused interventions
+## Analytical Approach
+
+### 1. Operational reliability metrics
+
+I calculated disruption indicators including delay frequency, cancellation events, and severe irregular operations.
+
+These metrics convert operational noise into structured risk variables.
 
 ---
 
-## Tools & Skills
-- SQL (CTEs, JOINs, aggregation, conditional logic)
-- Google BigQuery
-- Metric definition and validation
-- Product and retention analytics
+### 2. Retention behavior modeling
+
+Customers were segmented based on repeat usage patterns following disruption exposure.
+
+This allows comparison between:
+
+- stable experience cohorts
+- disruption-heavy cohorts
+
+to observe behavioral divergence.
+
+---
+
+### 3. Risk concentration analysis
+
+I identified whether retention risk is evenly distributed or concentrated within specific operational patterns.
+
+This step determines where intervention produces the highest impact.
+
+---
+
+## Results
+
+The analysis revealed:
+
+- Customers exposed to repeated disruptions show significantly lower repeat engagement
+- Severe disruptions create long-term retention damage, not just short-term dissatisfaction
+- Reliability risk is concentrated within identifiable operational patterns rather than random noise
+- A small subset of high-disruption events drives disproportionate retention loss
+
+This confirms that retention is an operational analytics problem, not only a marketing problem.
+
+---
+
+## Key Insights & Actions
+
+### Insight 1 — Disruption exposure predicts churn risk
+
+Customers experiencing repeated operational instability show measurable retention decline.
+
+**Action:**  
+Build early-warning dashboards that flag high-risk disruption clusters and trigger proactive customer recovery strategies.
+
+---
+
+### Insight 2 — Severe events have outsized behavioral impact
+
+A small number of high-severity disruptions drive a large share of retention loss.
+
+**Action:**  
+Prioritize recovery resources for severe operational failures instead of treating all disruptions equally.
+
+---
+
+### Insight 3 — Retention risk is structurally concentrated
+
+Risk is not random; it follows repeatable operational patterns.
+
+**Action:**  
+Shift analytics from reactive reporting to predictive monitoring of reliability hotspots.
+
+---
+
+## Business Impact
+
+This framework enables aviation operations teams to:
+
+- detect retention risk early
+- prioritize operational recovery investment
+- protect long-term customer value
+- align reliability metrics with business outcomes
+
+The project demonstrates how operational analytics can directly inform retention strategy.
+
+---
+
+## Tools & Skills Demonstrated
+
+Advanced SQL • Aggregations • Multi-table joins  
+Customer retention analytics • Operational reliability modeling  
+Decision-oriented analytics
