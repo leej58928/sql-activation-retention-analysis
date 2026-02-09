@@ -97,7 +97,8 @@ Activated users show a 40+ percentage point higher 30-day retention rate, highli
 
 ---
 
-## 🔧 Tools
+## Tools
 - SQL (CTEs, views, conditional aggregation)
 - Relational event data modeling
+
 
