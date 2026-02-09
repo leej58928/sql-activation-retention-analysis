@@ -71,10 +71,10 @@ The final output compares **30-day retention rates** by activation status:
 
 | Activation Status | Users | Retained Users | 30-Day Retention Rate |
 |------------------|-------|----------------|----------------------|
-| Activated        | N     | N              | X%                   |
-| Not Activated    | N     | N              | Y%                   |
+| Activated        | 269   | 175            | 65.1%                |
+| Not Activated    | 731   | 183            | 25.0%                |
 
-This comparison directly demonstrates the relationship between early activation behavior and long-term user retention.
+Activated users show a 40+ percentage point higher 30-day retention rate, highlighting the strong relationship between early activation and long-term engagement.
 
 ---
 
@@ -100,3 +100,4 @@ This comparison directly demonstrates the relationship between early activation 
 ## 🔧 Tools
 - SQL (CTEs, views, conditional aggregation)
 - Relational event data modeling
+
